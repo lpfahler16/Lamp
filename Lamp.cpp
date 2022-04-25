@@ -3,9 +3,9 @@
 
 Lamp::Lamp()
 {
-    FastLED.addLeds<WS2812, 7, GRB>(strip1, LENGTH);
-    FastLED.addLeds<WS2812, 8, GRB>(strip2, LENGTH);
-    FastLED.addLeds<WS2812, 9, GRB>(strip3, LENGTH);
+    FastLED.addLeds<WS2812, 7, GRB>(strip0, LENGTH);
+    FastLED.addLeds<WS2812, 8, GRB>(strip1, LENGTH);
+    FastLED.addLeds<WS2812, 9, GRB>(strip2, LENGTH);
     FastLED.clear();
 }
 
@@ -44,13 +44,13 @@ struct CRGB Lamp::GetLED(int strip, int led)
     switch (strip)
     {
     case 1:
-        return strip1[led];
+        return strip0[led];
         break;
     case 2:
-        return strip2[led];
+        return strip1[led];
         break;
     case 3:
-        return strip3[led];
+        return strip2[led];
         break;
     default:
         return CRGB(0, 0, 0);
