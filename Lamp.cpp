@@ -21,13 +21,13 @@ void Lamp::SetLED(int strip, int led, struct CRGB color)
     switch (strip)
     {
     case 0:
-        strip1[led] = color;
+        strip0[led] = color;
         break;
     case 1:
-        strip2[led] = color;
+        strip1[led] = color;
         break;
     case 2:
-        strip3[led] = color;
+        strip2[led] = color;
         break;
     default:
         return;

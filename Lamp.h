@@ -10,9 +10,9 @@ class Lamp
 {
 
 private:
+    struct CRGB strip0[NUM_LEDS];
     struct CRGB strip1[NUM_LEDS];
     struct CRGB strip2[NUM_LEDS];
-    struct CRGB strip3[NUM_LEDS];
 
 public:
     const static unsigned int LENGTH = NUM_LEDS;
