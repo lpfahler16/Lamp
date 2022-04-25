@@ -20,13 +20,13 @@ void Lamp::SetLED(int strip, int led, struct CRGB color)
 
     switch (strip)
     {
-    case 1:
+    case 0:
         strip1[led] = color;
         break;
-    case 2:
+    case 1:
         strip2[led] = color;
         break;
-    case 3:
+    case 2:
         strip3[led] = color;
         break;
     default:
@@ -102,8 +102,5 @@ void Lamp::Clear()
 
 void Lamp::Delay(int mil)
 {
-    int time = millis();
-    while (millis() - time < mil)
-    {
-    }
+    delay(mil);
 }
