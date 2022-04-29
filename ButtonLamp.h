@@ -4,28 +4,20 @@
 
 #include <FastLED.h>
 
-#include "Lamp.h"
+#include "ProgramLamp.h"
+#include "Program.h"
+#include "Dial.h"
 
-enum ButtonState
-{
-    DOWN,
-    UP,
-    IDLE
-};
-
-class ButtonLamp : public Lamp
+class ButtonLamp : public ProgramLamp
 {
 
 private:
-    enum ButtonState dial_button = IDLE;
-
-    void CheckButton();
-    void Run(void (*program)(ButtonLamp));
-    void Menu();
-
 public:
-    void Start();
+    ButtonLamp();
 
+    Dial *dial;
+    void Run();
+    void Menu();
     void Delay(int mil);
 };
 

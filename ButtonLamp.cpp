@@ -1,59 +1,70 @@
 #include "ButtonLamp.h"
 #include <FastLED.h>
 
-// void ButtonLamp::Start()
-// {
-//     while (true)
-//     {
-//         try
-//         {
-//             CheckButton();
-//         }
-//         catch (const char *msg)
-//         {
-//             Menu();
-//             Run();
-//         }
-//         delay(20);
-//     }
-// }
+ButtonLamp::ButtonLamp()
+    : ProgramLamp()
+{
+    // Initialize potentiometer and button
+    dial = new Dial(4, 3, 2, false);
+    dial->Setup();
+}
+
+void ButtonLamp::Run()
+{
+
+    ProgramLamp::Run();
+
+    // Update button and check if menu should be run
+    dial->Update();
+    if (dial->button == UP)
+    {
+        dial->ResetButton();
+        Menu();
+    }
+}
 
 void ButtonLamp::Delay(int mil)
 {
     int interval = 20;
     int m = mil;
-    while (m >= interval)
+    while (m > interval)
     {
-        CheckButton();
+        dial->Update();
         delay(interval);
         m -= interval;
     }
-    CheckButton();
+    dial->Update();
     delay(m);
 }
 
-void ButtonLamp::CheckButton()
+void ButtonLamp::Menu()
 {
-    int button_value = 0; // Read button here
-    switch (dial_button)
+    int selected_program = 0;
+    int prevEncode = 0;
+    int section_size = LENGTH / num_programs;
+
+    while (dial->button != UP)
     {
-    case UP:
-        dial_button = IDLE;
-        // Throw error
-        break;
-    case DOWN:
-        if (button_value == 0)
+
+        int encoderVal = dial->pos; // Read encoder
+
+        if (prevEncode > encoderVal && selected_program > 0)
         {
-            dial_button = UP;
+            selected_program--;
         }
-        break;
-    case IDLE:
-        if (button_value == 1)
+        if (prevEncode < encoderVal && selected_program < num_programs - 1)
         {
-            dial_button = DOWN;
+            selected_program++;
         }
-        break;
-    default:
-        break;
+        prevEncode = encoderVal;
+
+        SetLamp(CRGB(0, 0, 0));
+        SetRings(selected_program * section_size, (selected_program + 1) * section_size, CRGB(255, 255, 255));
+        Show();
+
+        dial->Update();
     }
+    dial->Setup();
+    Clear();
+    ChooseProgram(selected_program);
 }
