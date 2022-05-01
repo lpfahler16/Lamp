@@ -25,8 +25,7 @@ void ButtonLamp::Delay(int mil)
 
 int ButtonLamp::Choose(int max)
 {
-    dial->Update();
-    if (dial->button == UP)
+    if (WillChoose())
     {
         dial->ResetButton();
         return Menu(max);
@@ -34,11 +33,17 @@ int ButtonLamp::Choose(int max)
     return -1;
 }
 
-int ButtonLamp::Menu(int num_programs)
+bool ButtonLamp::WillChoose()
+{
+    dial->Update();
+    return dial->button == UP;
+}
+
+int ButtonLamp::Menu(int max)
 {
     int selected_program = 0;
     int prevEncode = 0;
-    int section_size = LENGTH / num_programs;
+    float section_size = float(LENGTH) / max;
 
     while (dial->button != UP)
     {
@@ -49,7 +54,7 @@ int ButtonLamp::Menu(int num_programs)
         {
             selected_program--;
         }
-        if (prevEncode < encoderVal && selected_program < num_programs - 1)
+        if (prevEncode < encoderVal && selected_program < max - 1)
         {
             selected_program++;
         }

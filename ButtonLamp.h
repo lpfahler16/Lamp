@@ -3,8 +3,8 @@
 #define ButtonLamp_H
 
 #include "Lamp.h"
-#include "Dial/Dial.h"
-#include "Chooser/Chooser.h"
+#include "Dial.h"
+#include "Chooser.h"
 
 class ButtonLamp : public Lamp, public Chooser
 {
@@ -17,6 +17,7 @@ public:
     ButtonLamp();
 
     int Choose(int max);
+    bool WillChoose();
     void Delay(int mil);
 };
 

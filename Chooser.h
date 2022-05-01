@@ -6,7 +6,8 @@ class Chooser
 {
 
 public:
-    virtual int Choose(int num_programs) = 0;
+    virtual int Choose(int max) = 0;
+    virtual bool WillChoose() = 0;
 };
 
 #endif

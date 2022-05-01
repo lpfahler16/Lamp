@@ -2,7 +2,7 @@
 #ifndef Program_H
 #define Program_H
 
-#include "Lamp/ButtonLamp.h"
+#include "ButtonLamp.h"
 
 class Program
 {
@@ -20,16 +20,6 @@ protected:
 
 public:
     ButtonProgram(ButtonLamp *l);
-};
-
-class StartProgram : public ButtonProgram
-{
-public:
-    StartProgram(ButtonLamp *l);
-
-    void setup();
-
-    void loop();
 };
 
 class ProgramNode

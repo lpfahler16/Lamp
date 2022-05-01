@@ -1,23 +1,14 @@
 #include "ProgramController.h"
-#include "ButtonLamp.h"
 
-ProgramController::ProgramController(Chooser *choose_object, ButtonLamp *lamp)
+ProgramController::ProgramController(Chooser *choose_object)
 {
     chooser = choose_object;
-
-    // Create start program object
-    StartProgram *p = new StartProgram(lamp);
-    program = p;
-
-    // Create first program node with start program
-    ProgramNode *new_node = new ProgramNode();
-    programs = new_node;
-    programs->program = p;
-    programs->next = NULL;
 }
 
 void ProgramController::Run()
 {
+    if (program == NULL)
+        return;
 
     // Run setup if necessary
     if (!set_up)
@@ -30,13 +21,27 @@ void ProgramController::Run()
     program->loop();
 
     // Choose a new program if appropriate
-    int p = chooser->Choose(num_programs);
-    if (p != -1)
-        ChooseProgram(p);
+    if (chooser->WillChoose())
+    {
+        int p = chooser->Choose(num_programs);
+        if (p != -1)
+            ChooseProgram(p);
+    }
 }
 
 void ProgramController::AddProgram(Program *p)
 {
+    if (programs == NULL)
+    {
+        ProgramNode *new_node = new ProgramNode();
+        programs = new_node;
+        programs->program = p;
+        programs->next = NULL;
+        program = p;
+        num_programs = 1;
+        return;
+    }
+
     // Find the last program in the list
     ProgramNode *last_program = programs;
     while (last_program->next != NULL)
