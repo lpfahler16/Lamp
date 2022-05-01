@@ -1,5 +1,4 @@
 #include "Lamp.h"
-#include <FastLED.h>
 
 Lamp::Lamp()
 {

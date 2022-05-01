@@ -2,25 +2,11 @@
 #include <FastLED.h>
 
 ButtonLamp::ButtonLamp()
-    : ProgramLamp()
+    : Lamp()
 {
     // Initialize potentiometer and button
     dial = new Dial(4, 3, 2, false);
     dial->Setup();
-}
-
-void ButtonLamp::Run()
-{
-
-    ProgramLamp::Run();
-
-    // Update button and check if menu should be run
-    dial->Update();
-    if (dial->button == UP)
-    {
-        dial->ResetButton();
-        Menu();
-    }
 }
 
 void ButtonLamp::Delay(int mil)
@@ -37,7 +23,18 @@ void ButtonLamp::Delay(int mil)
     delay(m);
 }
 
-void ButtonLamp::Menu()
+int ButtonLamp::Choose(int max)
+{
+    dial->Update();
+    if (dial->button == UP)
+    {
+        dial->ResetButton();
+        return Menu(max);
+    }
+    return -1;
+}
+
+int ButtonLamp::Menu(int num_programs)
 {
     int selected_program = 0;
     int prevEncode = 0;
@@ -66,5 +63,5 @@ void ButtonLamp::Menu()
     }
     dial->Setup();
     Clear();
-    ChooseProgram(selected_program);
+    return selected_program;
 }
