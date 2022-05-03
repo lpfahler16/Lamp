@@ -16,8 +16,13 @@ private:
 public:
     ButtonLamp();
 
+    // Picks a number from 0 to max - 1. Returns -1 if dial button not pressed yet.
     int Choose(int max);
+
+    // Indicates whether Lamp is ready to go into chooser mode
     bool WillChoose();
+
+    // Delays mil miliseconds and checks for button presses
     void Delay(int mil);
 };
 

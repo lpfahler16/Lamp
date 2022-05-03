@@ -4,6 +4,7 @@
 
 #include "Arduino.h"
 
+// Indicates the state of the button
 enum ButtonState
 {
     DOWN,
@@ -28,12 +29,22 @@ private:
     void UpdateEncoder();
 
 public:
+    // Creates button with pin values and whether or not there should be rollover of encoder values
     Dial(int P_A, int P_B, int B_PIN, bool roll);
 
+    // Current position of the encoder
     int pos = 0;
+
+    // Current state of the button
     enum ButtonState button = IDLE;
+
+    // Sets up Arduino pins and resets button / position
     void Setup();
+
+    // Read encoder and button values and update values
     void Update();
+
+    // Resets button to idle
     void ResetButton();
 };
 
