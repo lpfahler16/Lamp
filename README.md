@@ -6,7 +6,7 @@ An Arduino library made to control an LED lamp. The library is built off of the 
 - FastLED
 
 ## Lamp Class
----
+
 Create a lamp object to control the lights in a lamp. LEDs within the lamp can be set to a CRGB, CHSV, or HEX color. You can also get the current color of an LED. Available methods can be found in [Lamp.h](/Lamp.h).
 
 ### Example .INO
@@ -32,7 +32,7 @@ void loop() {
 }
 ```
 ## ButtonProgram Class
----
+
 ButtonProgram is an abstract class that represents a program with a ButtonLamp. This class can be extended and the setup() and loop() methods can be implemented to represent a specific program. Available methods can be found in [Program.h](/Program.h).
 
 ### Example
@@ -60,7 +60,7 @@ public:
 ```
 
 ## Program Controller
----
+
 A program controller can be used to switch between programs on the arduino. The controller takes in a Chooser and checks with the Chooser whether to switch to a new program (Note: ButtonLamp implements the Chooser interface). The controller can be run in the loop. Available methods can be found in [ProgramController.h](/ProgramController.h).
 
 ### Example .INO
@@ -83,5 +83,5 @@ void loop() {
 ```
 
 ## UML Diagram
----
+
 ![UML Diagram](/UML_Diagram.png)
